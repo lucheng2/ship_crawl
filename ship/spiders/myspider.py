@@ -46,13 +46,13 @@ class MySpider(CrawlSpider):
     # #     # 填写爬取地址
     # start_urls = [
     #     "https://www.myshiptracking.com/vessels"
-    host = "https://www.myshiptracking.com/vessels"
+    host = "https://www.myshiptracking.com"
     # # start_urls是我们准备爬的初始页
     start_urls = [
         'https://www.myshiptracking.com/vessels?page=2',
     ]
-    # start_urls = ['https://www.myshiptracking.com/vessels/mrs-leslie-mmsi-368123180-imo-0']
 
+    # start_urls = ['https://www.myshiptracking.com/vessels/mrs-leslie-mmsi-368123180-imo-0']
 
     #
     # rules = [
@@ -66,9 +66,10 @@ class MySpider(CrawlSpider):
         # 遍历这个list，处理每一个标签
         for content in content_list:
             # 此处提取出帖子的url地址。
-            url = self.host + content.xpath('@href').extract_first()
+            url = self.host+content.xpath('@href').extract_first()
             print("url:\n" + url)
             yield scrapy.Request(url, callback=self.parse_item, dont_filter=True)
+
     # def __init__(self, site, start_urls):
     #     re_rule = '[\w\W]*{}[\w\W]*'.format(site)
     #     rule = [Rule(LinkExtractor(allow=re_rule), callback='parse_item', follow=True)]
