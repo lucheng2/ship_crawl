@@ -1,4 +1,5 @@
 .idea
 ship_info.json
+ship_info.csv
 *.pyc
 

@@ -49,15 +49,114 @@ class MySpider(CrawlSpider):
     host = "https://www.myshiptracking.com"
     # # start_urls是我们准备爬的初始页
     start_urls = [
-        'https://www.myshiptracking.com/vessels?page=2',
+        'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 3)
     ]
 
-    # start_urls = ['https://www.myshiptracking.com/vessels/mrs-leslie-mmsi-368123180-imo-0']
-
-    #
-    # rules = [
-    #     Rule(LinkExtractor(allow='https://www.myshiptracking.com/vessels/ft-nervi-mmsi-215481000-imo-9447299'), callback='parse_item', follow=True)
+    # # 1: 1~1501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 1501)
     # ]
+
+    # # 2: 1501~3001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1501, 3001)
+    # ]
+
+    # # 3: 3001~4501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(3001, 4501)
+    # ]
+
+    # # 4: 4501~6001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(4501, 6001)
+    # ]
+
+    # # 5: 6001~7501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(6001, 7501)
+    # ]
+
+    # # 6: 7501~9001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(7501, 9001)
+    # ]
+
+    # # 7: 9001~10501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(9001, 10501)
+    # ]
+
+    # # 8: 10501~12001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(10501, 12001)
+    # ]
+
+    # # 9: 12001~13501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(12001, 13501)
+    # ]
+
+    # # 10: 13501~15001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(13501, 15001)
+    # ]
+
+    # # 11: 15001~16501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(15001, 16501)
+    # ]
+
+    # # 12: 16501~18001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(16501, 18001)
+    # ]
+
+    # # 13: 18001~19501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(18001, 19501)
+    # ]
+
+    # # 14: 19501~21001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(19501, 21001)
+    # ]
+
+    # # 15: 21001~22501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(21001, 22501)
+    # ]
+
+    # # 16: 22501~24001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(22501, 24001)
+    # ]
+
+    # # 17: 24001~25501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(24001, 25501)
+    # ]
+
+    # # 18: 25501~27001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(25501, 27001)
+    # ]
+
+    # # 19: 27001~28501
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(27001, 28501)
+    # ]
+
+    # # 20: 28501~30001
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(28501, 30001)
+    # ]
+
+    # # 21: 30001~31652
+    # start_urls = [
+    #     'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(30001, 31652)
+    # ]
+
     def parse(self, response):
         selector = Selector(response)
         # 在此，xpath会将所有class=topic的标签提取出来，当然这是个list
@@ -66,7 +165,7 @@ class MySpider(CrawlSpider):
         # 遍历这个list，处理每一个标签
         for content in content_list:
             # 此处提取出帖子的url地址。
-            url = self.host+content.xpath('@href').extract_first()
+            url = self.host + content.xpath('@href').extract_first()
             print("url:\n" + url)
             yield scrapy.Request(url, callback=self.parse_item, dont_filter=True)
 

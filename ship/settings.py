@@ -16,7 +16,7 @@ ROTATING_PROXY_LIST = [
     'us-wa.proxymesh.com:31280',
 ]
 
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 2
 
 # 当访问异常时是否进行重试
 RETRY_ENABLED = True
@@ -36,7 +36,8 @@ CONCURRENT_REQUESTS_PER_IP = 50
 
 
 DOWNLOADER_MIDDLEWARES = {
-            "ship.middleware.UserAgentMiddleware": 401,
+            'ship.middleware.UserAgentMiddleware': 543,
+            'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
             "ship.middleware.ProxyMiddleware": 402,
         }
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
