@@ -1,2 +1,4 @@
 .idea
 ship_info.json
+*.pyc
+
