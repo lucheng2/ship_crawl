@@ -49,15 +49,16 @@ class MySpider(CrawlSpider):
     host = "https://www.myshiptracking.com"
     # # start_urls是我们准备爬的初始页
     start_urls = [
-        'https://www.myshiptracking.com/vessels?page=2',
+        'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 3)
     ]
-
+    print(start_urls)
     # start_urls = ['https://www.myshiptracking.com/vessels/mrs-leslie-mmsi-368123180-imo-0']
 
     #
     # rules = [
-    #     Rule(LinkExtractor(allow='https://www.myshiptracking.com/vessels/ft-nervi-mmsi-215481000-imo-9447299'), callback='parse_item', follow=True)
+    #     Rule(LinkExtractor(allow='https://www.myshiptracking.com/vessels?page=^(?:[0-9]{1,3}|1000)$'), callback='parse', follow=True)
     # ]
+
     def parse(self, response):
         selector = Selector(response)
         # 在此，xpath会将所有class=topic的标签提取出来，当然这是个list
@@ -66,7 +67,7 @@ class MySpider(CrawlSpider):
         # 遍历这个list，处理每一个标签
         for content in content_list:
             # 此处提取出帖子的url地址。
-            url = self.host+content.xpath('@href').extract_first()
+            url = self.host + content.xpath('@href').extract_first()
             print("url:\n" + url)
             yield scrapy.Request(url, callback=self.parse_item, dont_filter=True)
 
