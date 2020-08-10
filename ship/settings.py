@@ -14,9 +14,11 @@ NEWSPIDER_MODULE = 'ship.spiders'
 
 ROTATING_PROXY_LIST = [
     'us-wa.proxymesh.com:31280',
+    'fr.proxymesh.com:31280',
+    'open.proxymesh.com:31280'
 ]
 
-DOWNLOAD_DELAY = 2
+DOWNLOAD_DELAY = 1
 
 # 当访问异常时是否进行重试
 RETRY_ENABLED = True
