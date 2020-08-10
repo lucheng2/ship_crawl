@@ -49,7 +49,7 @@ class MySpider(CrawlSpider):
     host = "https://www.myshiptracking.com/vessels"
     # # start_urls是我们准备爬的初始页
     start_urls = [
-        'https://www.myshiptracking.com/vessels?pp=50&page=2',
+        'https://www.myshiptracking.com/vessels?page=2',
     ]
     # start_urls = ['https://www.myshiptracking.com/vessels/mrs-leslie-mmsi-368123180-imo-0']
 
@@ -85,6 +85,6 @@ class MySpider(CrawlSpider):
             item[keyword_to_item_k[i]] = response.xpath(
                 '//table[@class="vessels_table"]//tr[' + str(i) + ']//td[2]//text()').extract()
             # print("item:\n" + str(item))
-            yield item
+        yield item
 
 # item[keyword_to_item_k[i]] = response.url
