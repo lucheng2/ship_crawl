@@ -18,14 +18,14 @@ ROTATING_PROXY_LIST = [
     'open.proxymesh.com:31280'
 ]
 
-DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 3
 
 # 当访问异常时是否进行重试
 RETRY_ENABLED = True
 # 当遇到以下http状态码时进行重试
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
 # 重试次数
-RETRY_TIMES = 2
+RETRY_TIMES = 10
 
 # Pipeline的并发数。同时最多可以有多少个Pipeline来处理item
 CONCURRENT_ITEMS = 200
@@ -40,7 +40,9 @@ CONCURRENT_REQUESTS_PER_IP = 50
 DOWNLOADER_MIDDLEWARES = {
             'ship.middleware.UserAgentMiddleware': 543,
             'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-            "ship.middleware.ProxyMiddleware": 402,
+            # "ship.middleware.ProxyMiddleware": 402,
+            'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+            'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
         }
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ship (+http://www.yourdomain.com)'
