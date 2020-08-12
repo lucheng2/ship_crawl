@@ -1,3 +1,4 @@
 pandas
 scrapy
 scrapy-rotating-proxies
+scrapy_proxies

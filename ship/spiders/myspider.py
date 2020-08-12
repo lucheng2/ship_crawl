@@ -49,7 +49,7 @@ class MySpider(CrawlSpider):
     host = "https://www.myshiptracking.com"
     # # start_urls是我们准备爬的初始页
     start_urls = [
-        'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 3)
+        'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 31652)
     ]
 
     # # 1: 1~1501
