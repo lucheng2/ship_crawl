@@ -17,8 +17,9 @@ NEWSPIDER_MODULE = 'ship.spiders'
 #     'fr.proxymesh.com:31280',
 #     'open.proxymesh.com:31280'
 # ]
+ROTATING_PROXY_LIST_PATH = './proxy_list.txt'
 
-PROXY_LIST = './proxy_list.txt'
+# PROXY_LIST = './proxy_list.txt'
 
 # Proxy mode
 # 0 = Every requests have different proxy
@@ -26,14 +27,15 @@ PROXY_LIST = './proxy_list.txt'
 # 2 = Put a custom proxy to use in the settings
 PROXY_MODE = 0
 
-DOWNLOAD_DELAY = 1
+DOWNLOAD_DELAY = 5
 
 # 当访问异常时是否进行重试
 RETRY_ENABLED = True
 # 当遇到以下http状态码时进行重试
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
 # 重试次数
-RETRY_TIMES = 10
+RETRY_TIMES = 30
+ROTATING_PROXY_PAGE_RETRY_TIMES = 30
 
 # Pipeline的并发数。同时最多可以有多少个Pipeline来处理item
 CONCURRENT_ITEMS = 200
@@ -46,16 +48,26 @@ CONCURRENT_REQUESTS_PER_IP = 50
 
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
-    'scrapy_proxies.RandomProxy': 100,
+    # 'scrapy_proxies.RandomProxy': 100,
     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
-    # 'ship.middleware.UserAgentMiddleware': 543,
-    # 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    # # "ship.middleware.ProxyMiddleware": 402,
-    # 'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
-    # 'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
+    'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware': 100,
+    'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware': 300,
+    'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware': 350,
+    'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware': 400,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 500,
+    'scrapy.downloadermiddlewares.ajaxcrawl.AjaxCrawlMiddleware': 560,
+    'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware': 580,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 590,
+    'scrapy.downloadermiddlewares.redirect.RedirectMiddleware': 600,
+    'scrapy.downloadermiddlewares.cookies.CookiesMiddleware': 700,
+    'scrapy.downloadermiddlewares.stats.DownloaderStats': 850,
+    'scrapy.downloadermiddlewares.httpcache.HttpCacheMiddleware': 900,
+    'rotating_proxies.middlewares.RotatingProxyMiddleware': 610,
+    'rotating_proxies.middlewares.BanDetectionMiddleware': 620,
 }
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'ship (+http://www.yourdomain.com)'
+USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
