@@ -34,8 +34,8 @@ RETRY_ENABLED = True
 # 当遇到以下http状态码时进行重试
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
 # 重试次数
-RETRY_TIMES = 50
-ROTATING_PROXY_PAGE_RETRY_TIMES = 50
+RETRY_TIMES = 30
+ROTATING_PROXY_PAGE_RETRY_TIMES = 30
 
 # Pipeline的并发数。同时最多可以有多少个Pipeline来处理item
 CONCURRENT_ITEMS = 200
@@ -50,7 +50,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.retry.RetryMiddleware': 90,
     # 'scrapy_proxies.RandomProxy': 100,
     'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 110,
-    'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware': 100,
+    # 'scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware': 100,
     'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware': 300,
     'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware': 350,
     'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware': 400,
