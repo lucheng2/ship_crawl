@@ -27,15 +27,15 @@ ROTATING_PROXY_LIST_PATH = './proxy_list.txt'
 # 2 = Put a custom proxy to use in the settings
 PROXY_MODE = 0
 
-DOWNLOAD_DELAY = 5
+DOWNLOAD_DELAY = 6
 
 # 当访问异常时是否进行重试
 RETRY_ENABLED = True
 # 当遇到以下http状态码时进行重试
 RETRY_HTTP_CODES = [500, 502, 503, 504, 400, 403, 404, 408]
 # 重试次数
-RETRY_TIMES = 30
-ROTATING_PROXY_PAGE_RETRY_TIMES = 30
+RETRY_TIMES = 50
+ROTATING_PROXY_PAGE_RETRY_TIMES = 50
 
 # Pipeline的并发数。同时最多可以有多少个Pipeline来处理item
 CONCURRENT_ITEMS = 200
