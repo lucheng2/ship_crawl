@@ -47,9 +47,9 @@ class MySpider(CrawlSpider):
     # start_urls = [
     #     "https://www.myshiptracking.com/vessels"
     host = "https://www.myshiptracking.com"
-    # # start_urls是我们准备爬的初始页
+    # # start_urls是我们准备爬的初始页, 目标网站有31758页, 如果后续有新增的页数就改成新页数
     start_urls = [
-        'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 31652)
+        'https://www.myshiptracking.com/vessels?page=' + str(i) for i in range(1, 31758)
     ]
 
     # # 1: 1~1501
